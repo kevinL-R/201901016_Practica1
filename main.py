@@ -1,16 +1,4 @@
 import re,json
-def readJson(filename):
-    try:
-        file = open(filename + '.json')
-        data = json.load(file)
-        
-    except FileNotFoundError:
-        mensaje= 'el archivo siguiente no existe: ' + filename
-        print(mensaje)
-    else:
-        dict = data
-        for elemento in dict:
-            print(elemento)
 
 repetir_bucle= True
 while repetir_bucle:
@@ -21,18 +9,49 @@ while repetir_bucle:
         s = match.start()
         e = match.end()
         comando1=comandos[s:e]
-        espacio=" "
         archivo=comandos.replace(comando1, "")
-        archivos=archivo.strip()
+        archivo_n=archivo.replace(" ","")
+        archivos=archivo_n.strip()
         filenames=archivos.split(",")
         print(filenames)
         for filename in filenames:
-            readJson(filename)
+            try:
+                file = open(filename + '.json')
+                datos = file.read()
+                data = json.loads(datos)
+                dict=data
+            except FileNotFoundError:
+                mensaje= 'el archivo siguiente no existe: ' + filename
+                print(mensaje)
+            else:
+                for elemento in dict:
+                    print(elemento)                  
        #comando seleccionar  
-    print(filenames)   
-    select= re.findall('Seleccionar|Donde',comandos, re.IGNORECASE)
-    if select :
-        print("(prueba) existe seleccion o donde en el comando")
+     
+    if re.search('Seleccionar',comandos,re.IGNORECASE)!=None:
+        print('(prueba) seleccionar')
+        match=re.search('Seleccionar',comandos,re.IGNORECASE)
+        s = match.start()
+        e = match.end()
+        comando2=comandos[s:e]
+        atributo= comandos.replace(comando2,"")
+        atributo_n=atributo.replace(" ", "")
+        atributos= atributo_n.strip()
+        atributos_lista=atributos.split(",")
+        for filename in filenames:
+            file = open(filename + '.json')
+            datos_s = file.read()
+            data_s = json.loads(datos_s)
+            dict=data_s
+            for elemento in dict:     
+                for attribute in atributos_lista:
+                    if elemento['nombre']=="kevin":
+                        print(f"{elemento[attribute]50}")
+
+    #subcomando Donde
+
+    if re.search('Maximo',comandos,re.IGNORECASE)!=None:
+        print('(prueba) maximo')   
     #comando maximo
     if re.search('Maximo',comandos,re.IGNORECASE)!=None:
         print('(prueba) maximo')
@@ -53,4 +72,7 @@ while repetir_bucle:
     salir= input('presione 1 si desea salir, si desea utilizar otro comando presione enter: ')
     if salir=='1':
         repetir_bucle= False
+
+
+
     
