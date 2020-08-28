@@ -101,25 +101,94 @@ while repetir_bucle:
                         for attribute in atributos_lista:
                             print(attribute +":"+ " " + f"{elemento[attribute]:5}")
                         print("------------------------------------")
-                    
-
-    
-
+    #comando maximo               
     if re.search('Maximo',comandos,re.IGNORECASE)!=None:
-        print('(prueba) maximo')   
-    #comando maximo
-    if re.search('Maximo',comandos,re.IGNORECASE)!=None:
-        print('(prueba) maximo')
+        match=re.search('Maximo',comandos,re.IGNORECASE)
+        s= match.start()
+        e= match.end()
+        comando3=comandos[s:e+1]
+        atributo_max=comandos.replace(comando3,"")
+        lista_c=[]
+        for filename in filenames:
+            file = open(filename)
+            datos_s = file.read()
+            data_s = json.loads(datos_s)            #imprimimos los atributos segun las condiciones establecidas
+            dict=data_s
+            for elemento in dict: 
+                maximo= f"{elemento[atributo_max]}"
+                lista_c.append(maximo)
+        print("-----------------------------") 
+        print("Estas son todos los atributos de tipo "+atributo_max + " encontradas en los registros: " )
+        print(lista_c)
+        print("El/la "+ atributo_max+" maximo es: " + max(lista_c))
+        print("------------------------------")
+
+
     #comando minimo
     if re.search('Minimo',comandos,re.IGNORECASE)!=None:
-        print('(prueba) minimo')
+        match=re.search('Minimo',comandos,re.IGNORECASE)
+        s= match.start()
+        e= match.end()
+        comando3=comandos[s:e+1]
+        atributo_min=comandos.replace(comando3,"")
+        lista_c=[]
+        for filename in filenames:
+            file = open(filename)
+            datos_s = file.read()
+            data_s = json.loads(datos_s)            #imprimimos los atributos segun las condiciones establecidas
+            dict=data_s
+            for elemento in dict: 
+                minimo= f"{elemento[atributo_min]}"
+                lista_c.append(minimo)
+        print("-----------------------------") 
+        print("Estas son todos los atributos de tipo "+atributo_min + " encontradas en los registros: " )
+        print(lista_c)
+        print("El/la "+ atributo_min+" minimo es: " + min(lista_c))
+        print("------------------------------")
+        
     #comando suma
     if re.search('Suma',comandos,re.IGNORECASE)!=None:
-        print('(prueba) suma')
+        match=re.search('Suma',comandos,re.IGNORECASE)
+        s= match.start()
+        e= match.end()
+        comando3=comandos[s:e+1]
+        atributo_sum=comandos.replace(comando3,"")
+        lista_c=[]
+        for filename in filenames:
+            file = open(filename)
+            datos_s = file.read()
+            data_s = json.loads(datos_s)            #imprimimos los atributos segun las condiciones establecidas
+            dict=data_s
+            for elemento in dict: 
+                suma= f"{elemento[atributo_sum]}"
+                lista_c.append(suma)
+        print("-----------------------------") 
+        print("Estas son todos los atributos de tipo "+atributo_sum + " encontradas en los registros: " )
+        print(lista_c)
+        print("la suma de los atributos de tipo "+ atributo_sum+" es: " )
+        print(sum(float(i) for i in lista_c))
+        print("------------------------------")
+        
 
     #comando cuenta
     if re.search('Cuenta',comandos,re.IGNORECASE)!=None:
-        print('(prueba) cuenta')
+        cuenta=0
+        cuenta1=0
+        registro=0
+        for filename in filenames:
+            file = open(filename)
+            datos_s = file.read()
+            data_s = json.loads(datos_s)            #imprimimos los atributos segun las condiciones establecidas
+            dict=data_s
+            for elemento in dict: 
+                cuenta= cuenta+len(elemento)
+                cuenta1=cuenta1+len(dict)
+        registro=cuenta1/2
+        print("Este es el numero de atributos cargados a memoria:")
+        print(cuenta)
+        print("Este es el numero de registros cargados a memoria:")
+        print(int(registro))
+        
     #comando reportar
     if re.search('Reportar',comandos,re.IGNORECASE)!=None:
         print('(prueba) reportar')
