@@ -1,4 +1,4 @@
-import re,json
+import re,json,webbrowser
 
 repetir_bucle= True
 while repetir_bucle:
@@ -173,7 +173,6 @@ while repetir_bucle:
     #comando cuenta
     if re.search('Cuenta',comandos,re.IGNORECASE)!=None:
         cuenta=0
-        cuenta1=0
         registro=0
         for filename in filenames:
             file = open(filename)
@@ -182,8 +181,8 @@ while repetir_bucle:
             dict=data_s
             for elemento in dict: 
                 cuenta= cuenta+len(elemento)
-                cuenta1=cuenta1+len(dict)
-        registro=cuenta1/2
+                
+        registro=cuenta/4
         print("Este es el numero de atributos cargados a memoria:")
         print(cuenta)
         print("Este es el numero de registros cargados a memoria:")
@@ -191,7 +190,95 @@ while repetir_bucle:
         
     #comando reportar
     if re.search('Reportar',comandos,re.IGNORECASE)!=None:
-        print('(prueba) reportar')
+        match=re.search('Reportar',comandos,re.IGNORECASE)
+        s= match.start()
+        e= match.end()
+        comandoR=comandos[s:e+1]
+        num_registro=comandos.replace(comandoR,"")
+        num_registros=int(num_registro)
+        lista_nombre=[]
+        lista_edades=[]
+        lista_activo=[]
+        lista_promedio=[]
+        registros_condicion=1
+        
+        for filename in filenames:
+            file = open(filename)
+            datos_s = file.read()
+            data_s = json.loads(datos_s)            #imprimimos los atributos segun las condiciones establecidas
+            dict=data_s
+           
+            for elemento in dict: 
+                if registros_condicion<=num_registros:
+                    nombres= f"{elemento['nombre']}"
+                    lista_nombre.append(nombres)
+                    edades= f"{elemento['edad']}"
+                    lista_edades.append(edades)
+                    activos= f"{elemento['activo']}"
+                    lista_activo.append(activos)
+                    promedios= f"{elemento['promedio']}"
+                    lista_promedio.append(promedios)
+                    registros_condicion=registros_condicion+1
+
+        with open('reporte.html', 'w') as myFile:
+            myFile.write('<!DOCTYPE html>')
+            myFile.write('<html>')
+            myFile.write('<head>')
+            myFile.write('<meta charset="utf-8">')
+            myFile.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">')
+            myFile.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>')
+            myFile.write('<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>')
+            myFile.write('</head>')
+            myFile.write('<body>')
+            myFile.write('<center>')
+            myFile.write('<h1>REPORTE</h1>')
+            myFile.write('<table border="1" class="table table-striped">')
+            myFile.write('<tr>')
+            myFile.write('<td>Nombres</td>')
+            for nom in lista_nombre:
+                myFile.write('<td>')
+                myFile.write(nom)
+                myFile.write('</td>')
+            myFile.write('</tr>')
+            myFile.write('<tr>')
+            myFile.write('<td>Edades</td>')
+            for eda in lista_edades:
+                myFile.write('<td>')
+                myFile.write(eda)
+                myFile.write('</td>')
+            myFile.write('</tr>')
+            myFile.write('<tr>')
+            myFile.write('<td>Activo</td>')
+            for act in lista_activo:
+                myFile.write('<td>')
+                myFile.write(act)
+                myFile.write('</td>')
+            myFile.write('</tr>')
+            myFile.write('<tr>')
+            myFile.write('<td>Promedios</td>')
+            for pro in lista_promedio:
+                myFile.write('<td>')
+                myFile.write(pro)
+                myFile.write('</td>')
+            myFile.write('</tr>')
+            myFile.write('</table>')
+            myFile.write('</center>')
+            myFile.write('</body>')
+            myFile.write('</html>')
+        webbrowser.open('reporte.html', new=2, autoraise=True)
+            
+
+
+            
+            
+                
+            
+
+
+
+
+
+        
 
     salir= input('presione 1 si desea salir, si desea utilizar otro comando presione enter: ')
     if salir=='1':
