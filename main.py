@@ -219,7 +219,7 @@ while repetir_bucle:
                     promedios= f"{elemento['promedio']}"
                     lista_promedio.append(promedios)
                     registros_condicion=registros_condicion+1
-
+        report_registro="Reporte de: " + num_registro +" registros"
         with open('reporte.html', 'w') as myFile:
             myFile.write('<!DOCTYPE html>')
             myFile.write('<html>')
@@ -228,57 +228,50 @@ while repetir_bucle:
             myFile.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">')
             myFile.write('<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>')
             myFile.write('<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>')
+            myFile.write('<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">')
+            myFile.write('<link href="estilo.css" type="text/css" rel="stylesheet" media="">')
             myFile.write('</head>')
             myFile.write('<body>')
             myFile.write('<center>')
-            myFile.write('<h1>REPORTE</h1>')
-            myFile.write('<table border="1" class="table table-striped">')
-            myFile.write('<tr>')
-            myFile.write('<td>Nombres</td>')
+            myFile.write('<header>')
+            myFile.write(report_registro)
+            myFile.write('</header>')
+            myFile.write('<div>')
+            myFile.write('<table border="1" class="table table-dark">')
+            myFile.write('<tr align="center">')
+            myFile.write('<th scope="col">Nombre</th>')
             for nom in lista_nombre:
                 myFile.write('<td>')
                 myFile.write(nom)
                 myFile.write('</td>')
             myFile.write('</tr>')
-            myFile.write('<tr>')
-            myFile.write('<td>Edades</td>')
+            myFile.write('<tr align="center">')
+            myFile.write('<th scope="col">Edad</th>')
             for eda in lista_edades:
                 myFile.write('<td>')
                 myFile.write(eda)
                 myFile.write('</td>')
             myFile.write('</tr>')
-            myFile.write('<tr>')
-            myFile.write('<td>Activo</td>')
+            myFile.write('<tr align="center">')
+            myFile.write('<th scope="col">Activo</th>')
             for act in lista_activo:
                 myFile.write('<td>')
                 myFile.write(act)
                 myFile.write('</td>')
             myFile.write('</tr>')
-            myFile.write('<tr>')
-            myFile.write('<td>Promedios</td>')
+            myFile.write('<tr align="center">')
+            myFile.write('<th scope="col">Promedio</th>')
             for pro in lista_promedio:
                 myFile.write('<td>')
                 myFile.write(pro)
                 myFile.write('</td>')
             myFile.write('</tr>')
             myFile.write('</table>')
+            myFile.write('</div>')
             myFile.write('</center>')
             myFile.write('</body>')
             myFile.write('</html>')
         webbrowser.open('reporte.html', new=2, autoraise=True)
-            
-
-
-            
-            
-                
-            
-
-
-
-
-
-        
 
     salir= input('presione 1 si desea salir, si desea utilizar otro comando presione enter: ')
     if salir=='1':

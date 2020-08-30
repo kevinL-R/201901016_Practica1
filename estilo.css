@@ -1,0 +1,24 @@
+body{
+			background-color: #F5F5F5;
+			background-image: url(images.jpg);
+			background-size: 100%;
+			background-repeat: no-repeat;
+		}
+header{
+	position: relative;
+	margin:20px auto;  
+	width: 1000px;
+	height: 50px;
+	font-family: 'Kaushan Script', cursive;
+	font-size:60px;
+	text-align:center;
+	line-height:60px;
+	color: white;
+}
+div{
+	position: relative;
+	margin:20px auto;  
+	width: 600px;
+	height: 100px;
+	color:white;
+}
