@@ -70,4 +70,4 @@ la estructura del comando es:
 
 Reportar 2
 
-Al colocar 2 solo se reportara 2 registros de los archivos cargados a memoria
+Al colocar 2 solo se reportara 2 registros de los archivos cargados a memoria.
