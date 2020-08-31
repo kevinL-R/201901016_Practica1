@@ -1,8 +1,9 @@
 import re,json,webbrowser
-
+print("Bienvenido haga su respectiva consulta!")
 repetir_bucle= True
 while repetir_bucle:
     comandos= input('ingrese un comando: ')
+    print(" ")
     #comando cargar
     if re.search('CaRgar',comandos,re.IGNORECASE)!=None:
         match=re.search('CaRgar',comandos,re.IGNORECASE)
@@ -13,7 +14,10 @@ while repetir_bucle:
         archivo_n=archivo.replace(" ","")
         archivos=archivo_n.strip()
         filenames=archivos.split(",")
+        print("Los archivos cargados a memoria son los siguientes: ")
         print(filenames)
+        print("Visualizacion de los archivos cargados")
+        print("-----------------------------------------------------------")
         for filename in filenames:
             try:
                 file = open(filename)
@@ -25,7 +29,8 @@ while repetir_bucle:
                 print(mensaje)
             else:
                 for elemento in dict:
-                    print(elemento)                  
+                    print(elemento)  
+            print("---------------------------------------------------------")                
        #comando seleccionar  
      
     if re.search('Seleccionar',comandos,re.IGNORECASE)!=None:
@@ -45,6 +50,7 @@ while repetir_bucle:
         atributo_d=parte_d[sx:ex]                       #se obtendra el atributo condicion
         atributo_p2= parte_d.replace(atributo_d,"")          #quitaremos esa palabra de la segunda parte de la cadena
         atributo_condi=atributo_p2.replace("=", "")  #atributo que define la condicion de donde ="" quitando el signo igual
+        atributo_condicion=atributo_condi.strip()    #atributo que define la condicion quitando los espacios en blanco
         atributo= parte_1.replace(comando2,"") #en la primera parte de la cadena quitaremos el seleccionar
         atributo_n=atributo.replace(" ", "") #quitaremos los espacios en blanco
         atributos= atributo_n.strip()     #se quitara algun espacio entre palabras
@@ -63,7 +69,8 @@ while repetir_bucle:
             condicion1="edad"
         
         
-        atributocondi= atributo_condi[1:len(atributo_condi)-1]
+        atributocondi= atributo_condicion[1:len(atributo_condicion)-1]
+        
         x = re.findall("\d", atributo_condi)
         if x:
             atributocondi=float(atributo_condi)
@@ -274,9 +281,10 @@ while repetir_bucle:
         webbrowser.open('reporte.html', new=2, autoraise=True)
 
     salir= input('presione 1 si desea salir, si desea utilizar otro comando presione enter: ')
+    print(" ")
     if salir=='1':
+        print("Feliz dia vuelva pronto!")
         repetir_bucle= False
-
 
 
     
