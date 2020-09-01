@@ -11,6 +11,7 @@ el comando a utilizar esta la lista de comandos disponibles:
 5. Suma
 6. Cuenta
 7. Reportar
+El unico archivo que se debera abrir es el archivo "main.py" los otros dos archivos son para el estilo del reporte html
 ## Comando Cargar 
 Este comando permitirá la carga de diferentes archivos de tipo json a memoria, el único
 parámetro que lo conforma es una lista de direcciones a los archivos que cargará a
